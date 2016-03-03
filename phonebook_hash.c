@@ -7,8 +7,8 @@
 
 entry *findName(char lastname[], entry *table[])
 {
-	unsigned nHash = hash(lastname);
-	entry *pHead = table[nHash];
+    unsigned nHash = hash(lastname);
+    entry *pHead = table[nHash];
     while (pHead != NULL) {
         if (strcasecmp(lastname, pHead->lastName) == 0)
             return pHead;
@@ -19,30 +19,30 @@ entry *findName(char lastname[], entry *table[])
 
 void append(char lastName[], entry *table[])
 {
-	unsigned nHash = hash(lastName);
+    unsigned nHash = hash(lastName);
     entry *e = (entry *) malloc(sizeof(entry));
     e -> pNext = table[nHash];
-	if(!table[nHash]){
-		table[nHash] = e;
-	} else {
-		table[nHash] -> pNext = e;
-	}
-	strcpy(e -> lastName, lastName);
+    if(!table[nHash]) {
+        table[nHash] = e;
+    } else {
+        table[nHash] -> pNext = e;
+    }
+    strcpy(e -> lastName, lastName);
 }
 
 unsigned hash(char name[])
 {
-	unsigned sum;
-	int i;
-	for (sum = 1, i = 0; i < 16 && name[i] > 0; i++) {
-		sum = sum * name[i] - i * name [i];
-	}
-	return sum % MOD;
+    unsigned sum;
+    int i;
+    for (sum = 1, i = 0; i < 16 && name[i] > 0; i++) {
+        sum = sum * name[i] - i * name [i];
+    }
+    return sum % MOD;
 }
 
 void initTable(entry *table[])
 {
-	for(int i = 0; i < MOD; i++) {
-		table[i]=NULL;
-	}
+    for(int i = 0; i < MOD; i++) {
+        table[i]=NULL;
+    }
 }

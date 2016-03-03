@@ -48,9 +48,9 @@ int main(int argc, char *argv[])
 #endif
 
 #if defined(HASH)
-	entry *table[MOD];
-	initTable(table);
-	clock_gettime(CLOCK_REALTIME, &start);
+    entry *table[MOD];
+    initTable(table);
+    clock_gettime(CLOCK_REALTIME, &start);
     while (fgets(line, sizeof(line), fp)) {
         while (line[i] != '\0')
             i++;
@@ -81,18 +81,18 @@ int main(int argc, char *argv[])
     /* the givn last name to find */
     char input[MAX_LAST_NAME_SIZE] = "zyxel";
     e = pHead;
-/*
-    assert(findName(input, e) &&
-           "Did you implement findName() in " IMPL "?");
-    assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
-*/
+    /*
+        assert(findName(input, e) &&
+               "Did you implement findName() in " IMPL "?");
+        assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
+    */
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
 #endif
     /* compute the execution time */
 
 #if defined(HASH)
-	clock_gettime(CLOCK_REALTIME, &start);
+    clock_gettime(CLOCK_REALTIME, &start);
     findName(input, table);
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time2 = diff_in_second(start, end);
@@ -106,14 +106,14 @@ int main(int argc, char *argv[])
 
     FILE *output;
 #if defined(OPT)
-	output = fopen("opt.txt", "a");
+    output = fopen("opt.txt", "a");
 #elif defined(HASH)
-	output = fopen("hash.txt", "a");
-#else 
-	output = fopen("orig.txt", "a");
+    output = fopen("hash.txt", "a");
+#else
+    output = fopen("orig.txt", "a");
 #endif
-	fprintf(output, "append() findName() %lf %lf\n", cpu_time1, cpu_time2);
-	fclose(output);
+    fprintf(output, "append() findName() %lf %lf\n", cpu_time1, cpu_time2);
+    fclose(output);
 
     printf("execution time of append() : %lf sec\n", cpu_time1);
     printf("execution time of findName() : %lf sec\n", cpu_time2);
